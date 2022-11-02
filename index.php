@@ -1,6 +1,6 @@
 <?php 
 
-
+header("content-type: application/json");
 // je clique sur valider dans le formulaire de connexion
 
 // le JS envoi une requete vers une addresse http précise avec une méthode demandé GET/POST/PUT/ DELETE
@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_URI"] !== null && $_SERVER["REQUEST_URI"] !== ""){
     if ($_SERVER["REQUEST_URI"] ==  "/api_example/tableauDeBord"){
         require_once 'controller/User.php';
             $data = getUser();
-        var_dump($data);
+        echo $data;
+        // récupérer les données en JS  
     }
 }
