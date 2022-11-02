@@ -30,3 +30,35 @@ function getUserData(){
     
     
     }
+
+    // function to add the column gainTotal à chaque ajout de MIssion/Vacation, temps de travail aussi
+
+    function getTableauDeBordUser($idUser){
+
+        require_once "model/connexionBdd.php";
+
+        $req = $bdd->prepare("SELECT  *, SUM(`tauxHoraireGain`*`nbHeuresTravail`)  FROM Vacation WHERE MONTH(date) = MONTH(CURRENT_DATE()) AND idUserVacation = :idUser");
+       
+
+        $req->bindParam(":idUser", $idUser);
+        $req->execute();
+    
+        $donnees = $req->fetchAll(); 
+        $tabMission = [];
+
+        if ($donnees !== null ){
+            $x= 0;
+            foreach ($donnees as $data){
+                $tabMission[$x]["idVacation"] = $data["idVacation"];
+                $tabMission[$x]["nomMission"] = $data["nomMission"];
+                $tabMission[$x]["date"] = $data["date"];
+                $tabMission[$x]["heureDebut"] = $data["heureDebut"];              
+                $tabMission[$x]["heureFin"] = $data["heureFin"];
+                $tabMission[$x]["tauxHoraireGain"] = $data["tauxHoraireGain"];
+                $tabMission[$x]["gainObtenu"] = $data["gainObtenu"];
+                $tabMission[$x]["nbHeuresTravail"] = $data["nbHeuresTravail"];
+                $x++;
+            }
+            return $tabMission; 
+        }
+    }
