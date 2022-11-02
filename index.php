@@ -12,8 +12,8 @@ if ($_SERVER["REQUEST_URI"] !== null && $_SERVER["REQUEST_URI"] !== ""){
 
     if ($_SERVER["REQUEST_URI"] ==  "/api_example/tableauDeBord"){
         require_once 'controller/User.php';
-            $data = getUser();
-        echo $data;
+            $data =getUser();
+         echo $data; 
         // récupérer les données en JS  
     }
 }

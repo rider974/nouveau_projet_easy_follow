@@ -11,7 +11,7 @@ function getUserData(){
         $donnees = $req->fetchAll(); 
         $tabUsers = [];
         if ($donnees !== null ){
-            $x= 0;
+            $x= ;
             foreach ($donnees as $data){
                 $tabUsers[$x]["idUser"] = $data["idUser"];
                 
