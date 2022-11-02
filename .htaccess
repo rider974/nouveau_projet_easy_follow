@@ -1,0 +1,9 @@
+RewriteEngine On
+
+#location of your website
+RewriteBase /api_example
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.+)$ index.php
