@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Nov 02, 2022 at 11:44 AM
--- Server version: 8.0.27
--- PHP Version: 7.4.26
+-- Hôte : localhost
+-- Généré le : mer. 02 nov. 2022 à 10:21
+-- Version du serveur : 10.4.25-MariaDB
+-- Version de PHP : 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,75 +18,101 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `easy_follow`
+-- Base de données : `easy_follow`
 --
-CREATE DATABASE IF NOT EXISTS `easy_follow` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `easy_follow`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utilisateurs`
+-- Structure de la table `users`
 --
 
-DROP TABLE IF EXISTS `utilisateurs`;
-CREATE TABLE IF NOT EXISTS `utilisateurs` (
-  `idUser` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `idUser` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `motDePasse` varchar(255) NOT NULL,
-  `prenom` varchar(25) NOT NULL,
-  `nom` varchar(25) NOT NULL,
-  PRIMARY KEY (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `password` varchar(255) NOT NULL,
+  `name` varchar(25) NOT NULL,
+  `surname` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `utilisateurs`
+-- Déchargement des données de la table `users`
 --
 
-INSERT INTO `utilisateurs` (`idUser`, `email`, `motDePasse`, `prenom`, `nom`) VALUES
+INSERT INTO `users` (`idUser`, `email`, `password`, `name`, `surname`) VALUES
 (1, 'pascal@test.fr', '98', 'pascal', 'MINATCHY'),
 (2, 'davis.zitte@gmail.com', '95', 'david', 'Zitte');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vacation`
+-- Structure de la table `vacation`
 --
 
-DROP TABLE IF EXISTS `vacation`;
-CREATE TABLE IF NOT EXISTS `vacation` (
-  `idVacation` int NOT NULL AUTO_INCREMENT,
-  `nomMission` varchar(25) NOT NULL,
-  `date` date NOT NULL,
-  `heureDebut` time NOT NULL,
-  `heureFin` time NOT NULL,
-  `tauxHoraireGain` float(5,2) NOT NULL,
-  `gainObtenu` int DEFAULT NULL,
-  `nbHeuresTravail` int DEFAULT NULL,
-  `idUserVacation` int NOT NULL,
-  PRIMARY KEY (`idVacation`),
-  KEY `fk_vacation` (`idUserVacation`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `vacation` (
+  `idVacation` int(11) NOT NULL,
+  `vacationName` varchar(25) NOT NULL,
+  `vacationDate` date NOT NULL,
+  `beginHour` time NOT NULL,
+  `endHour` time NOT NULL,
+  `hourRate` float(5,2) NOT NULL,
+  `earnings` int(11) DEFAULT NULL,
+  `totalHours` int(11) DEFAULT NULL,
+  `idUserVacation` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `vacation`
+-- Déchargement des données de la table `vacation`
 --
 
-INSERT INTO `vacation` (`idVacation`, `nomMission`, `date`, `heureDebut`, `heureFin`, `tauxHoraireGain`, `gainObtenu`, `nbHeuresTravail`, `idUserVacation`) VALUES
+INSERT INTO `vacation` (`idVacation`, `vacationName`, `vacationDate`, `beginHour`, `endHour`, `hourRate`, `earnings`, `totalHours`, `idUserVacation`) VALUES
 (1, 'Preparateur de commande', '2022-10-02', '08:35:19', '16:35:19', 12.50, NULL, NULL, 1),
 (2, 'Caissier', '2022-09-04', '08:35:19', '16:35:19', 12.50, NULL, NULL, 1),
 (3, 'Caissier', '2022-10-11', '08:39:35', '16:39:35', 12.50, NULL, NULL, 2),
 (4, 'Caissier', '2022-10-16', '08:39:35', '16:39:35', 12.50, NULL, NULL, 2);
 
 --
--- Constraints for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Constraints for table `vacation`
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`idUser`);
+
+--
+-- Index pour la table `vacation`
 --
 ALTER TABLE `vacation`
-  ADD CONSTRAINT `fk_vacation` FOREIGN KEY (`idUserVacation`) REFERENCES `utilisateurs` (`idUser`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD PRIMARY KEY (`idVacation`),
+  ADD KEY `fk_vacation` (`idUserVacation`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `vacation`
+--
+ALTER TABLE `vacation`
+  MODIFY `idVacation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `vacation`
+--
+ALTER TABLE `vacation`
+  ADD CONSTRAINT `fk_vacation` FOREIGN KEY (`idUserVacation`) REFERENCES `users` (`idUser`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
