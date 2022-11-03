@@ -6,6 +6,11 @@ require_once "model/userModel.php";
 // param = email et mdp
 function getUser($email, $pass){
     $user = getUserData($email, $pass);
+    if (!empty($user)){
+        $_SESSION["idUser"] = $user["idUser"];
+        $_SESSION["connexionOk"] = true; 
+        $_SESSION["email"] = $user["email"]; 
+    }
     $data=  json_encode($user, JSON_PRETTY_PRINT);
     return $data; 
 }

@@ -50,17 +50,23 @@ function sendDataFetch(){
     fetch("http://localhost/api_example/connexion", {
         method: 'POST',
         headers: {
+            
              'Content-Type': 'application/x-www-form-urlencoded'
             //  'Content-Type': 'application/json'
         },
         // body: JSON.stringify(data)
+        // permet d'envoyer les données au bon format
         body : data
     })
            // return response.json()
     .then((response) => { 
+
         return response.json();
     })
     .then((dashboard) => {
+        
+        // stocker les données dans Local Storage
+        localStorage.setItem('idUser', dashboard.idUser);
         console.log(dashboard);
       })
       .catch((error) => {
