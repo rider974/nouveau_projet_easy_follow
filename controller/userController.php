@@ -1,11 +1,11 @@
 <?php 
 
 
-require_once "model/User.php";
+require_once "model/userModel.php";
 
 // param = email et mdp
-function getUser(){
-    $user = getUserData();
+function getUser($email, $pass){
+    $user = getUserData($email, $pass);
     $data=  json_encode($user, JSON_PRETTY_PRINT);
     return $data; 
 }

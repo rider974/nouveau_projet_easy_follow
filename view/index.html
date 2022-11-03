@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form action="http://localhost/api_example/connexion" method="post" enctype="multipart/form-data">
+
+            <input type="text" id="email" name="email">
+
+            
+            <input type="password" id="pass" name="pass">
+
+        <button onclick="">Se connecter</button>
+    </form>
+
+
+
+     <h1 id="title">Récupérer les données JSON et les afficher ici</h1>
+
+
+     
+    <button onclick="recupUser()">Recup User</button>
+
+    <button onclick="recupTabDeBord()">Recup Tableau de bord</button>
+
+    <p id="user1"></p>
+
+<script src="./script.js"></script>
+</body>
+</html>

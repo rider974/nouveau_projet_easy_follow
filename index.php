@@ -12,25 +12,27 @@ $idUser = $_SESSION["idUser"];
 if ($_SERVER["REQUEST_URI"] !== null && $_SERVER["REQUEST_URI"] !== ""){
 
     if ($_SERVER["REQUEST_URI"] ==  "/api_example/connexion"){
-        require_once 'controller/User.php';
+        require_once 'controller/userController.php';
+        if (isset($_POST["email"]) && $_POST["email"]!== "" && isset($_POST["pass"]) && $_POST["pass"]!== ""){
+
         
-   var_dump($_POST);
-           /* $data =getUser();
-            echo $data; */
+            $data =getUser($_POST["email"], $_POST["pass"]);
+            echo $data; 
+        }
         // récupérer les données en JS  
     }
 
     if (isset($connexionOk) && $connexionOk == true){
 
         if ($_SERVER["REQUEST_URI"] ==  "/api_example/tableauDeBord"){
-            require_once 'controller/User.php';
+            require_once 'controller/userController.php';
                 $data =getTableauDeBord();
                 echo $data; 
             // récupérer les données en JS  
         }
 
         if ($_SERVER["REQUEST_URI"] ==  "/api_example/$idUser"){
-            require_once 'controller/User.php';
+            require_once 'controller/userController.php';
                 $data =getTableauDeBord();
                 echo $data; 
             // récupérer les données en JS  

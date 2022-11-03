@@ -1,25 +1,27 @@
 <?php 
-function getUserData(){
+function getUserData($email, $pass){
     // obj = récupérer la ligne qui correspond à User mail et mdp 
 
     require_once "model/connexionBdd.php";
 
-        $req = $bdd->prepare("SELECT idUser, email,  prenom, nom FROM Utilisateurs ");
-       
+        $req = $bdd->prepare("SELECT idUser, email,  surname, name FROM users WHERE email = :email AND password=:pass");
+        
+       $req->bindParam(":mdp", $email);
+       $req->bindParam(":pass", $pass);
         $req->execute();
     
-        $donnees = $req->fetchAll(); 
+        $datas = $req->fetchAll(); 
         $tabUsers = [];
         if ($donnees !== null ){
             $x= 0;
-            foreach ($donnees as $data){
+            foreach ($datas as $data){
                 $tabUsers[$x]["idUser"] = $data["idUser"];
                 
                 $tabUsers[$x]["email"] = $data["email"];
                 
-                $tabUsers[$x]["prenom"] = $data["prenom"];
+                $tabUsers[$x]["surname"] = $data["surname"];
                 
-                $tabUsers[$x]["nom"] = $data["nom"];
+                $tabUsers[$x]["name"] = $data["name"];
                 
                 $x++;
             }
@@ -33,7 +35,7 @@ function getUserData(){
 
     // function to add the column gainTotal à chaque ajout de MIssion/Vacation, temps de travail aussi
 
-    function getTableauDeBordUser($idUser){
+    function getDashboardUser($idUser){
 
         require_once "model/connexionBdd.php";
 
