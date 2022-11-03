@@ -37,7 +37,7 @@ function getUserData(){
 
         require_once "model/connexionBdd.php";
 
-        $req = $bdd->prepare("SELECT  *, SUM(`tauxHoraireGain`*`nbHeuresTravail`)  FROM Vacation WHERE MONTH(date) = MONTH(CURRENT_DATE()) AND idUserVacation = :idUser");
+        $req = $bdd->prepare("SELECT  nomMission,SUM(nbHeuresTravail`) as nbHeuresTravailMoisEnCours, SUM(`tauxHoraireGain`*`nbHeuresTravail`) as GainTotalMoisEnCours FROM Vacation WHERE MONTH(date) = MONTH(CURRENT_DATE()) AND idUserVacation = :idUser");
        
 
         $req->bindParam(":idUser", $idUser);
@@ -62,3 +62,28 @@ function getUserData(){
             return $tabMission; 
         }
     }
+
+function getCalendrierUser($mois){
+    $req = $bdd->prepare("SELECT  date FROM Vacation WHERE MONTH(date) = :month AND idUserVacation = :idUser");
+
+    $req->bindParam(":month", $mois);
+    
+    $req->bindParam(":idUser", $_SESSION["idUser"]);
+    $req->execute();
+
+
+    $result = $req->fetchAll();
+
+    $tabCalendrier = [];
+
+        if ($result !== null ){
+            $x= 0;
+            foreach ($result as $data){
+                $tabCalendrier[$x]["idVacation"] = $data["idVacation"];
+                $tabCalendrier[$x]["date"] = $data["date"];
+                $x++;
+            }
+            return $tabMission; 
+        } 
+
+}

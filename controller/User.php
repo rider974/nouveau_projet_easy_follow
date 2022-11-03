@@ -17,3 +17,15 @@ function getTableauDeBord(){
     $data = json_encode($tableauMission);
     return $data; 
 }
+/*
+function getCalendrier( $mois = date("m")){
+
+    if (isset($_POST["moisEnCours"]) && $_POST["moisEnCours"] !== ""){
+        $mois = $_POST["moisEnCours"];
+
+    }
+        $calendrier  = getCalendrierUser($mois);
+    
+
+}
+*/
