@@ -1,5 +1,5 @@
 <?php 
-//header("content-type: application/json");
+
 // je clique sur valider dans le formulaire de connexion
 
 // le JS envoi une requete vers une addresse http précise avec une méthode demandé GET/POST/PUT/ DELETE
@@ -8,18 +8,24 @@
 $connexionOk = true ;
 $_SESSION["idUser"] = 1; 
 $idUser = $_SESSION["idUser"]; 
+$data = "{}";
 
 if ($_SERVER["REQUEST_URI"] !== null && $_SERVER["REQUEST_URI"] !== ""){
 
     if ($_SERVER["REQUEST_URI"] ==  "/api_example/connexion"){
-        require_once 'controller/userController.php';
-        if (isset($_POST["email"]) && $_POST["email"]!== "" && isset($_POST["pass"]) && $_POST["pass"]!== ""){
-
         
+        
+        if (isset($_POST["email"]) && !empty($_POST["email"]) && isset($_POST["pass"]) && !empty($_POST["pass"])){
+
+            // die("ici");
+        
+
+            require_once 'controller/userController.php';
             $data =getUser($_POST["email"], $_POST["pass"]);
-            echo $data; 
-        }
-        // récupérer les données en JS  
+          
+            
+        } 
+        echo $data;
     }
 
     if (isset($connexionOk) && $connexionOk == true){

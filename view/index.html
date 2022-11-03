@@ -8,14 +8,19 @@
 </head>
 <body>
 
-    <form action="http://localhost/api_example/connexion" method="post" enctype="multipart/form-data">
+    <script type="text/javascript" src="./script.js">
+
+
+
+    </script>
+    <form  id='my-form' method="post">
 
             <input type="text" id="email" name="email">
 
             
             <input type="password" id="pass" name="pass">
 
-        <button onclick="">Se connecter</button>
+        <button onclick="sendDataFetch()">Se connecter</button>
     </form>
 
 
@@ -24,12 +29,11 @@
 
 
      
-    <button onclick="recupUser()">Recup User</button>
+    <button onclick="recupUserData()">Recup User</button>
 
     <button onclick="recupTabDeBord()">Recup Tableau de bord</button>
 
     <p id="user1"></p>
 
-<script src="./script.js"></script>
 </body>
 </html>

@@ -4,15 +4,15 @@ function getUserData($email, $pass){
 
     require_once "model/connexionBdd.php";
 
-        $req = $bdd->prepare("SELECT idUser, email,  surname, name FROM users WHERE email = :email AND password=:pass");
-        
-       $req->bindParam(":mdp", $email);
+        $req = $bdd->prepare("SELECT idUser, email,  surname, name FROM users WHERE email = :email AND password= :pass");
+
+       $req->bindParam(":email", $email);
        $req->bindParam(":pass", $pass);
         $req->execute();
     
         $datas = $req->fetchAll(); 
         $tabUsers = [];
-        if ($donnees !== null ){
+        if ($datas !== null ){
             $x= 0;
             foreach ($datas as $data){
                 $tabUsers[$x]["idUser"] = $data["idUser"];
