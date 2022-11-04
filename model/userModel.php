@@ -11,7 +11,8 @@ function getUserData($email, $pass){
         $req->execute();
     
         $datas = $req->fetch(); 
-        $tabUsers = [];
+
+      /*  $tabUsers = [];
         if ($datas !== null ){
             $x= 0;
             foreach ($datas as $data){
@@ -25,11 +26,9 @@ function getUserData($email, $pass){
                 
                 $x++;
             }
-        }
-    
-    
-        return $tabUsers; 
-    
+        }*/
+       // return $tabUsers; 
+        return $datas; 
     
     }
 
@@ -39,30 +38,27 @@ function getUserData($email, $pass){
 
         require_once "model/connexionBdd.php";
 
-        $req = $bdd->prepare("SELECT  MONTH(`vacationDate`) as moisEnCours, SUM(`totalHours`) as nbHeuresTravailMoisEnCours, SUM(`hourRate`*`totalHours`) as GainTotalMoisEnCours FROM Vacation WHERE MONTH(`vacationDate`) = MONTH(CURRENT_DATE()) AND idUserVacation = :idUser)";
+        $req = $bdd->prepare("SELECT  MONTH(`vacationDate`) as moisEnCours, SUM(`totalHours`) as nbHeuresTravailMoisEnCours, SUM(`hourRate`*`totalHours`) as GainTotalMoisEnCours FROM Vacation WHERE MONTH(`vacationDate`) = MONTH(CURRENT_DATE()) AND idUserVacation = :idUser");
        
 
         $req->bindParam(":idUser", $_SESSION["idUser"]);
         $req->execute();
     
-        $donnees = $req->fetchAll(); 
-        $tabMission = [];
+        $datas = $req->fetch(); 
+       /* $tabMission = [];
 
-        if ($donnees !== null ){
+        if ($datas !== null ){
             $x= 0;
-            foreach ($donnees as $data){
-                $tabMission[$x]["idVacation"] = $data["idVacation"];
-                $tabMission[$x]["nomMission"] = $data["nomMission"];
-                $tabMission[$x]["date"] = $data["date"];
-                $tabMission[$x]["heureDebut"] = $data["heureDebut"];              
-                $tabMission[$x]["heureFin"] = $data["heureFin"];
-                $tabMission[$x]["tauxHoraireGain"] = $data["tauxHoraireGain"];
-                $tabMission[$x]["gainObtenu"] = $data["gainObtenu"];
-                $tabMission[$x]["nbHeuresTravail"] = $data["nbHeuresTravail"];
+            foreach ($datas as $data){
+                $tabMission[$x]["GainTotalMoisEnCours"] = $data["GainTotalMoisEnCours"];
+                $tabMission[$x]["moisEnCours"] = $data["moisEnCours"];
+                $tabMission[$x]["nbHeuresTravailMoisEnCours"] = $data["nbHeuresTravailMoisEnCours"];
+               
                 $x++;
             }
             return $tabMission; 
-        }
+        }*/
+        return $datas; 
     }
 
 function getCalendrierUser($mois){

@@ -12,14 +12,14 @@ function getUser($email, $pass){
         $_SESSION["email"] = $user["email"]; 
     }
     $data=  json_encode($user, JSON_PRETTY_PRINT);
+   
     return $data; 
 }
 
 // afficher les données: heures Totales et Gain pour le mois en cours
-function getTableauDeBord(){
-    $idUser = 2; 
-    $tableauMission = getTableauDeBordUser($idUser); 
-    $data = json_encode($tableauMission);
+function getDashboard(){
+    $dashboardMission = getDashboardUser(); 
+    $data = json_encode($dashBoardMission);
     return $data; 
 }
 /*
