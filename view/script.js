@@ -23,6 +23,8 @@ function recupTabDeBord(){
 }
 
 
+
+
 // Envoyez les données du formulaire de connexion et attendre s'il y a une réponse effectuer les actions...
 function sendData(){
     var XHR = new XMLHttpRequest();

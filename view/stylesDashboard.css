@@ -1,0 +1,13 @@
+#logo {
+    width: 100px;
+}
+
+::placeholder {
+    text-align: center;
+}
+
+.rectangle {
+    height: 10em;
+    width: 20em;
+    background-color: rgb(230, 227, 227);
+}
