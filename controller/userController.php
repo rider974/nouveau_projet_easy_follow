@@ -10,15 +10,16 @@ function getUser($email, $pass){
         $_SESSION["idUser"] = $user["idUser"];
         $_SESSION["connexionOk"] = true; 
         $_SESSION["email"] = $user["email"]; 
+        
+        $data=  json_encode($user, JSON_PRETTY_PRINT);
     }
-    $data=  json_encode($user, JSON_PRETTY_PRINT);
    
     return $data; 
 }
 
 // afficher les données: heures Totales et Gain pour le mois en cours
-function getDashboard(){
-    $dashboardMission = getDashboardUser(); 
+function getDashboard($idUser){
+    $dashboardMission = getDashboardUser($idUser); 
     $data = json_encode($dashBoardMission);
     return $data; 
 }

@@ -4,7 +4,7 @@ function getUserData($email, $pass){
 
     require_once "model/connexionBdd.php";
 
-        $req = $bdd->prepare("SELECT idUser, email,  surname, name FROM users WHERE email = :email AND password= :pass");
+        $req = $bdd->prepare("SELECT idUser, email,  surname, name FROM users WHERE email = :email AND password= :pass ");
 
        $req->bindParam(":email", $email);
        $req->bindParam(":pass", $pass);
@@ -12,7 +12,8 @@ function getUserData($email, $pass){
     
         $datas = $req->fetch(); 
 
-      /*  $tabUsers = [];
+/*
+       $tabUsers = [];
         if ($datas !== null ){
             $x= 0;
             foreach ($datas as $data){
@@ -26,25 +27,27 @@ function getUserData($email, $pass){
                 
                 $x++;
             }
-        }*/
-       // return $tabUsers; 
+        }
+        return $tabUsers; */
         return $datas; 
     
     }
 
     // function to add the column gainTotal à chaque ajout de MIssion/Vacation, temps de travail aussi
 
-    function getDashboardUser(){
+    function getDashboardUser($idUser){
 
         require_once "model/connexionBdd.php";
 
-        $req = $bdd->prepare("SELECT  MONTH(`vacationDate`) as moisEnCours, SUM(`totalHours`) as nbHeuresTravailMoisEnCours, SUM(`hourRate`*`totalHours`) as GainTotalMoisEnCours FROM Vacation WHERE MONTH(`vacationDate`) = MONTH(CURRENT_DATE()) AND idUserVacation = :idUser");
+        $req = $bdd->prepare("SELECT  MONTH(`vacationDate`) as moisEnCours, SUM(`totalHours`) as nbHeuresTravailMoisEnCours, SUM(`hourRate`*`totalHours`) as GainTotalMoisEnCours FROM Vacation WHERE MONTH(`vacationDate`) = MONTH(CURRENT_DATE()) AND idUserVacation = :idUser ");
        
 
-        $req->bindParam(":idUser", $_SESSION["idUser"]);
+        $req->bindParam(":idUser", $idUser);
         $req->execute();
     
-        $datas = $req->fetch(); 
+        $datas = $req->fetch();
+        
+        
        /* $tabMission = [];
 
         if ($datas !== null ){

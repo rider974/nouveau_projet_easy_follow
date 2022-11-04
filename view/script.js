@@ -47,10 +47,9 @@ function sendDataFetch(){
     let password= document.getElementById("pass").value; 
     // let data = {'email':  mail, 'pass': password};
     let data = "email=" + mail + "&pass=" + password;
-    fetch("http://localhost/api_example/connexion", {
+     fetch("http://localhost/api_example/connexion", {
         method: 'POST',
         headers: {
-            
              'Content-Type': 'application/x-www-form-urlencoded'
             //  'Content-Type': 'application/json'
         },
@@ -58,25 +57,22 @@ function sendDataFetch(){
         // permet d'envoyer les données au bon format
         body : data
     })
-    
-          //  return response.json()
-    .then((response) => { 
-
-        return response.json();
-    })
-    .then((result) => {
-        
-        // stocker les données dans Local Storage
       
-        localStorage.setItem('idUser', result.idUser);
-        
+     //      return response.json()
+
+     .then((response) => {
+        return response.json();
+        //return response.text(); 
       })
-      .then((dashboard)=> {
-        loadingDashboard();
+    .then((result) => {
+        // stocker les données dans Local Storage
+        console.log(result);
+        localStorage.setItem('idUser', result.idUser);
+        //loadingDashboard();
       })
       .catch((error) => {
         console.error('There has been a problem with your fetch operation:', error);
-      });  
+      }); 
 }
 
 function sendData2(functionData){
@@ -99,7 +95,7 @@ function sendUserData(){
 
 
 function loadingDashboard(){
-  let data = "idUser="+ localStorage.getItem('idUser');
+  let data = "idUser="+ localStorage.getItem('idUser').value;
   fetch("http://localhost/api_example/dashboard", {
     method: 'POST',
     headers: {
@@ -111,7 +107,6 @@ function loadingDashboard(){
     // permet d'envoyer les données au bon format
     body : data
 })
-
       //  return response.json()
 .then((response) => { 
 
@@ -119,11 +114,11 @@ function loadingDashboard(){
 })
 .then((result) => {
     
-    // stocker les données dans Local Storage
-  
+    // afficher les données sur la page dashboard
+    console.log(result);
   })
   .then((dashboard)=> {
-    window.location = "https//";  
+     
   })
   .catch((error) => {
     console.error('There has been a problem with your fetch operation:', error);
