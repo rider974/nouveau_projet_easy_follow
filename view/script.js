@@ -42,7 +42,7 @@ function sendData(){
 
 
 function sendDataFetch(){
-
+// envoyer les données du formulaire email et mdp et recevoir les données qui sont envoyés par le controller de User pour la connexion
     let mail= document.getElementById("email").value; 
     let password= document.getElementById("pass").value; 
     // let data = {'email':  mail, 'pass': password};
@@ -58,20 +58,25 @@ function sendDataFetch(){
         // permet d'envoyer les données au bon format
         body : data
     })
-           // return response.json()
+    
+          //  return response.json()
     .then((response) => { 
 
         return response.json();
     })
-    .then((dashboard) => {
+    .then((result) => {
         
         // stocker les données dans Local Storage
-        localStorage.setItem('idUser', dashboard.idUser);
-        console.log(dashboard);
+      
+        localStorage.setItem('idUser', result.idUser);
+        
+      })
+      .then((dashboard)=> {
+        loadingDashboard();
       })
       .catch((error) => {
         console.error('There has been a problem with your fetch operation:', error);
-      });   
+      });  
 }
 
 function sendData2(functionData){
@@ -90,4 +95,38 @@ function sendUserData(){
     let value  = document.getElementById('name').value; 
     req.responseType = "json";
     req.send({"POST": value});
+}
+
+
+function loadingDashboard(){
+  let data = "idUser="+ localStorage.getItem('idUser');
+  fetch("http://localhost/api_example/dashboard", {
+    method: 'POST',
+    headers: {
+        
+         'Content-Type': 'application/x-www-form-urlencoded'
+        //  'Content-Type': 'application/json'
+    },
+    // body: JSON.stringify(data)
+    // permet d'envoyer les données au bon format
+    body : data
+})
+
+      //  return response.json()
+.then((response) => { 
+
+    return response.json();
+})
+.then((result) => {
+    
+    // stocker les données dans Local Storage
+  
+  })
+  .then((dashboard)=> {
+    window.location = "https//";  
+  })
+  .catch((error) => {
+    console.error('There has been a problem with your fetch operation:', error);
+  });  
+
 }
