@@ -37,10 +37,10 @@ function getUserData($email, $pass){
 
     function getDashboardUser($idUser){
 
-        require_once "model/connexionBdd.php";
+            require_once "model/connexionBdd.php";
 
-        $req = $bdd->prepare("SELECT  MONTH(`vacationDate`) as moisEnCours, SUM(`totalHours`) as nbHeuresTravailMoisEnCours, SUM(`hourRate`*`totalHours`) as GainTotalMoisEnCours FROM Vacation WHERE MONTH(`vacationDate`) = MONTH(CURRENT_DATE()) AND idUserVacation = :idUser ");
-       
+            $req = $bdd->prepare("SELECT  MONTH(`vacationDate`) as moisEnCours, SUM(`totalHours`) as nbHeuresTravailMoisEnCours, SUM(`hourRate`*`totalHours`) as GainTotalMoisEnCours FROM Vacation WHERE MONTH(`vacationDate`) = MONTH(CURRENT_DATE()) AND idUserVacation = :idUser ");
+        
 
         $req->bindParam(":idUser", $idUser);
         $req->execute();

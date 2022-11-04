@@ -11,7 +11,7 @@
 # créer un routeur en méthode Objet 
 
 
-# concevoir le MCD et garder une trace 
+# concevoir le MCD 
 
 
 # avoir un ReadME.md pour le projet et tenir une liste de tâches trello 
@@ -19,7 +19,7 @@
 
 
 # COncevoir des composants métiers 
-<p>Faire des composants qui sont reliés au coeur du projet</p>
+<p>Faire des composants qui sont reliés au couer de métier du client. ex: lui permettre d'ajouter des tâches, lui fournir une liste de ses missions et de ses gains</p>
 
 
 # 
